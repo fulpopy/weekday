@@ -1,27 +1,7 @@
 import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import { Paper } from "@mui/material";
 import { useState, useEffect } from "react";
-
-function CustomPaper({ children }) {
-  return (
-    <Paper
-      sx={{
-        boxSizing: "border-box",
-        display: "flex",
-        flexFlow: "wrap",
-        color: "#0d0d0d",
-        overflow: "auto",
-        "& li": {
-          width: "100%",
-        },
-      }}
-    >
-      {children}
-    </Paper>
-  );
-}
 
 export default function SelectOptions({ type, menuItems, data, setData }) {
   const [filters, setFilters] = useState([]);
@@ -31,7 +11,9 @@ export default function SelectOptions({ type, menuItems, data, setData }) {
   return (
     <Autocomplete
       onChange={(event, newValue) => setFilters(newValue)}
-      sx={{ margin: "5px" }}
+      sx={{
+        margin: "5px",
+      }}
       autoHighlight={true}
       size="small"
       multiple
