@@ -1,9 +1,8 @@
-import * as React from "react";
 import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { Paper } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function CustomPaper({ children }) {
   return (
@@ -24,8 +23,11 @@ function CustomPaper({ children }) {
   );
 }
 
-export default function SelectOptions({ type, menuItems }) {
+export default function SelectOptions({ type, menuItems, data, setData }) {
   const [filters, setFilters] = useState([]);
+  useEffect(() => {
+    setData(filters);
+  }, [filters]);
   return (
     <Autocomplete
       onChange={(event, newValue) => setFilters(newValue)}

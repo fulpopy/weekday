@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import SelectOptions from "./SelectOptions";
 import { TextField } from "@mui/material";
 import {
@@ -8,9 +8,27 @@ import {
   remote,
   minPay,
 } from "../constants/DropdownData";
+import { FiltersContext } from "../Context/FiltersProvider";
 
 const FilterBar = () => {
+  const {
+    roles,
+    setRoles,
+    numOfEmployees,
+    setNumOfEmployees,
+    experienceYear,
+    setExperienceYear,
+    workingMode,
+    setWorkingMode,
+    minimumPay,
+    setMinimumPay,
+    companyName,
+    setCompanyName,
+  } = useContext(FiltersContext);
   const [company, setCompany] = useState("");
+  useEffect(() => {
+    setCompanyName(company);
+  }, [company]);
   return (
     <div
       style={{
@@ -23,22 +41,44 @@ const FilterBar = () => {
       }}
     >
       <div style={{ minWidth: "200px" }}>
-        <SelectOptions type="Roles" menuItems={role} />
+        <SelectOptions
+          type="Roles"
+          menuItems={role}
+          setData={setRoles}
+          data={roles}
+        />
       </div>
       <div style={{ minWidth: "250px" }}>
         <SelectOptions
           type="Number of Employees"
           menuItems={numberOfEmployees}
+          setData={setNumOfEmployees}
+          data={numOfEmployees}
         />
       </div>
       <div style={{ minWidth: "150px" }}>
-        <SelectOptions type="Experience" menuItems={experience} />
+        <SelectOptions
+          type="Experience"
+          menuItems={experience}
+          setData={setExperienceYear}
+          data={experienceYear}
+        />
       </div>
       <div style={{ minWidth: "120px" }}>
-        <SelectOptions type="Remote" menuItems={remote} />
+        <SelectOptions
+          type="Remote"
+          menuItems={remote}
+          setData={setWorkingMode}
+          data={workingMode}
+        />
       </div>
       <div style={{ minWidth: "250px" }}>
-        <SelectOptions type="Minimum Base Pay Salary" menuItems={minPay} />
+        <SelectOptions
+          type="Minimum Base Pay Salary"
+          menuItems={minPay}
+          setData={setMinimumPay}
+          data={minimumPay}
+        />
       </div>
       <div style={{ margin: "5px" }}>
         <TextField
