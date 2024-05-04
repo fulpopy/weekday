@@ -26,7 +26,6 @@ function CustomPaper({ children }) {
 
 export default function SelectOptions({ type, menuItems }) {
   const [filters, setFilters] = useState([]);
-  console.log("filter State", filters);
   return (
     <Autocomplete
       onChange={(event, newValue) => setFilters(newValue)}

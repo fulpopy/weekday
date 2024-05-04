@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SelectOptions from "./SelectOptions";
 import { TextField } from "@mui/material";
 import {
@@ -10,6 +10,7 @@ import {
 } from "../constants/DropdownData";
 
 const FilterBar = () => {
+  const [company, setCompany] = useState("");
   return (
     <div
       style={{
@@ -44,6 +45,10 @@ const FilterBar = () => {
           sx={{ width: "200px" }}
           placeholder="Search Company Name"
           size="small"
+          onChange={(e) => {
+            setCompany(e.target.value);
+          }}
+          value={company}
         />
       </div>
     </div>
