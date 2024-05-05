@@ -129,8 +129,8 @@ const JobCard = ({ job }) => {
             </div>
           </div>
           <div style={{ height: "20px", fontSize: "15px" }}>
-            Estimated Salary: {salaryCurrencyCode === "USD" ? "$" : "₹"}
-            {minJdSalary} - {maxJdSalary} ⚠️
+            {/* Estimated Salary: {salaryCurrencyCode === "USD" ? "$" : "₹"} */}
+            Estimated Salary: ₹{minJdSalary}L - {maxJdSalary}L ⚠️
           </div>
           <div
             style={{

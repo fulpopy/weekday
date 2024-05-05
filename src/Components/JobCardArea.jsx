@@ -96,18 +96,29 @@ const JobCardArea = () => {
     <>
       <div
         style={{
-          width: "100%",
           display: "flex",
-          flexWrap: "wrap",
-          margin: "80px 80px 50px 80px",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        {jobs.map((e) => (
-          <div style={{ margin: "15px" }}>
-            <JobCard job={e} />
-          </div>
-        ))}
+        <div
+          style={{
+            width: "90%",
+            display: "flex",
+            flexWrap: "wrap",
+            margin: "60px 50px",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {jobs.map((e) => (
+            <div style={{ margin: "15px" }}>
+              <JobCard job={e} />
+            </div>
+          ))}
+        </div>
       </div>
+
       <div
         style={{
           display: "flex",
