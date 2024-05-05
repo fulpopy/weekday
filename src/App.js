@@ -1,7 +1,8 @@
 import Homepage from "./Pages/Homepage";
-import { getJobs } from "./server/api";
+import { getJobsApi } from "./server/api";
 
 function App() {
+  getJobsApi();
   return (
     <>
       <Homepage />
