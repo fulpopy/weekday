@@ -87,11 +87,11 @@ const JobCard = ({ job }) => {
           <div
             style={{ display: "flex", height: "70px", margin: "20px 0 0 0" }}
           >
-            <div style={{ height: "40px", width: "40px" }}>
+            <div style={{ height: "50px", width: "50px" }}>
               <img
-                style={{ height: "100%", marginTop: "5px" }}
+                style={{ width: "100%", marginTop: "5px" }}
                 src={logoUrl}
-                alt="Hike"
+                alt="logo"
               />
             </div>
             <div
@@ -102,7 +102,9 @@ const JobCard = ({ job }) => {
               }}
             >
               <div>
-                <StyledLink href="xyz.com">{companyName}</StyledLink>
+                <StyledLink href="xyz.com">
+                  {companyName ? companyName : "Company Name Missing"}
+                </StyledLink>
               </div>
               <div>
                 <Typography
@@ -112,7 +114,7 @@ const JobCard = ({ job }) => {
                     textTransform: "capitalize",
                   }}
                 >
-                  {jobRole === "ios" ? "IOS" : jobRole} (Full Time, {location})
+                  {jobRole ? jobRole : "Not Provided"} (Full Time, {location})
                 </Typography>
               </div>
               <div>
@@ -130,8 +132,10 @@ const JobCard = ({ job }) => {
           </div>
           <div style={{ height: "20px", fontSize: "15px" }}>
             {/* Estimated Salary: {salaryCurrencyCode === "USD" ? "$" : "₹"} */}
-            Estimated Salary: ₹{minJdSalary && `${minJdSalary}L -`}{" "}
-            {maxJdSalary}L ⚠️
+            Estimated Salary: ₹{minJdSalary && `${minJdSalary}L`}
+            {maxJdSalary && minJdSalary && " -"}{" "}
+            {maxJdSalary && `${maxJdSalary}L`}
+            {!maxJdSalary && !minJdSalary && "Salary Not Provide"} ⚠️
           </div>
           <div
             style={{
@@ -157,7 +161,9 @@ const JobCard = ({ job }) => {
                     fontSize: "15px",
                   }}
                 >
-                  {jobDetailsFromCompany}
+                  {jobDetailsFromCompany
+                    ? jobDetailsFromCompany
+                    : "Not Provided"}
                 </Typography>
               </div>
               <div
@@ -174,7 +180,11 @@ const JobCard = ({ job }) => {
                   Show More
                 </Button>
                 <MoreInfoDrawer
-                  jobDetailsFromCompany={jobDetailsFromCompany}
+                  jobDetailsFromCompany={
+                    jobDetailsFromCompany
+                      ? jobDetailsFromCompany
+                      : "Not Provided"
+                  }
                   open={open}
                   setOpen={setOpen}
                 />
@@ -197,7 +207,7 @@ const JobCard = ({ job }) => {
               Minimum Experience
             </Typography>
             <Typography>
-              {minExp ? `${minExp} years` : "Not Mentioned"}
+              {minExp ? `${minExp} years` : "Not Provided"}
             </Typography>
           </div>
           <div

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import JobCard from "./JobCard";
-import { useEffect, useContext } from "react";
-import { FiltersContext } from "../Context/FiltersProvider";
 import { CircularProgress, styled } from "@mui/material";
 import { getJobs } from "../server/api";
+import { FiltersContext } from "../Context/FiltersProvider";
 
 const StyledImage = styled("img")({
   height: "180px",
@@ -13,25 +12,6 @@ const JobCardArea = () => {
   const [jobs, setJobs] = useState([]);
   const [jobData, setJobData] = useState([]);
   const [offset, setOffset] = useState(0);
-  const getJobData = async () => {
-    let res = await getJobs();
-    setJobData((prev) => [...prev, ...res]);
-  };
-  useEffect(() => {
-    getJobData(offset);
-  }, [offset]);
-  function handleScroll() {
-    if (
-      window.innerHeight + document.documentElement.scrollTop + 1 >=
-      document.documentElement.scrollHeight
-    ) {
-      setOffset((prevPage) => prevPage + 10);
-    }
-  }
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
   const {
     roles,
     numOfEmployees,
@@ -40,57 +20,74 @@ const JobCardArea = () => {
     minimumPay,
     companyName,
   } = useContext(FiltersContext);
+
+  const getJobData = async (offset) => {
+    let res = await getJobs(offset);
+    setJobData((prev) => [...prev, ...res]);
+  };
+
   useEffect(() => {
-    const filteredJobs = jobData.filter((obj) => {
-      if (roles.length === 0) return true;
-      for (let i = 0; i < roles.length; i++) {
-        if (obj.jobRole.toLowerCase() === roles[i].title.toLowerCase())
-          return true;
-      }
+    getJobData(offset);
+  }, [offset]);
+
+  useEffect(() => {
+    const filteredJobs = jobData.filter(filterJobs);
+    setJobs(filteredJobs);
+  }, [jobData, roles, experienceYear, workingMode, minimumPay, companyName]);
+
+  function filterJobs(job) {
+    // Apply all filters here
+    if (
+      roles.length > 0 &&
+      !roles.some(
+        (role) => role.title.toLowerCase() === job.jobRole.toLowerCase()
+      )
+    ) {
       return false;
-    });
-    setJobs(filteredJobs);
-  }, [roles, jobData]);
-  // useEffect(() => {}, [numOfEmployees, jobData]);
-  useEffect(() => {
-    const filteredJobs = jobData.filter((obj) => {
-      if (experienceYear.length === 0) return true;
-      for (let i = 0; i < experienceYear.length; i++) {
-        if (obj.minExp >= parseInt(experienceYear[i].title)) return true;
-      }
+    }
+    if (
+      experienceYear.length > 0 &&
+      !experienceYear.some((year) => parseInt(year.title) <= job.minExp)
+    ) {
       return false;
-    });
-    setJobs(filteredJobs);
-  }, [experienceYear, jobData]);
-  useEffect(() => {
-    const filteredJobs = jobData.filter((obj) => {
-      if (workingMode.length === 0) return true;
-      for (let i = 0; i < workingMode.length; i++) {
-        if (obj.location.toLowerCase() === workingMode[i].title.toLowerCase())
-          return true;
-      }
+    }
+    if (
+      workingMode.length > 0 &&
+      !workingMode.some(
+        (mode) => mode.title.toLowerCase() === job.location.toLowerCase()
+      )
+    ) {
       return false;
-    });
-    setJobs(filteredJobs);
-  }, [workingMode, jobData]);
-  useEffect(() => {
-    const filteredJobs = jobData.filter((obj) => {
-      if (minimumPay.length === 0) return true;
-      for (let i = 0; i < minimumPay.length; i++) {
-        if (obj.minJdSalary >= parseInt(minimumPay[i].title)) return true;
-      }
+    }
+    if (
+      minimumPay.length > 0 &&
+      !minimumPay.some((pay) => parseInt(pay.title) <= job.minJdSalary)
+    ) {
       return false;
-    });
-    setJobs(filteredJobs);
-  }, [minimumPay, jobData]);
+    }
+    if (
+      companyName &&
+      companyName.toLowerCase() !== job.companyName.toLowerCase()
+    ) {
+      return false;
+    }
+    return true;
+  }
+
+  function handleScroll() {
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 1 >=
+      document.documentElement.scrollHeight
+    ) {
+      setOffset((prevPage) => prevPage + 10);
+    }
+  }
+
   useEffect(() => {
-    const filteredJobs = jobData.filter((obj) => {
-      return companyName
-        ? obj.companyName.toLowerCase() === companyName.toLowerCase()
-        : true;
-    });
-    setJobs(filteredJobs);
-  }, [companyName, jobData]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       <div
@@ -110,9 +107,9 @@ const JobCardArea = () => {
             alignItems: "center",
           }}
         >
-          {jobs.map((e) => (
-            <div style={{ margin: "15px" }}>
-              <JobCard job={e} />
+          {jobs.map((job) => (
+            <div style={{ margin: "15px" }} key={job.id}>
+              <JobCard job={job} />
             </div>
           ))}
         </div>
@@ -134,7 +131,6 @@ const JobCardArea = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            //   backgroundColor: "pink",
             height: "40vh",
           }}
         >
