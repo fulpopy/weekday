@@ -6,7 +6,7 @@ export const role = [
   { group: "ENGINEERING", title: "Flutter" },
   { group: "ENGINEERING", title: "React Native" },
   { group: "ENGINEERING", title: "Android" },
-  { group: "ENGINEERING", title: "Tech-Lead" },
+  { group: "ENGINEERING", title: "Tech Lead" },
   { group: "ENGINEERING", title: "Dev-Ops" },
   { group: "ENGINEERING", title: "Data Engineer" },
   { group: "ENGINEERING", title: "Data Science" },
