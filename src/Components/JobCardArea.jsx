@@ -36,7 +36,6 @@ const JobCardArea = () => {
   }, [jobData, roles, experienceYear, workingMode, minimumPay, companyName]);
 
   function filterJobs(job) {
-    // Apply all filters here
     if (
       roles.length > 0 &&
       !roles.some(
