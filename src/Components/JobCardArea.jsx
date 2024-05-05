@@ -16,7 +16,6 @@ const JobCardArea = () => {
   const getJobData = async () => {
     let res = await getJobs();
     setJobData((prev) => [...prev, ...res]);
-    setJobs((prev) => [...prev, ...res]);
   };
   useEffect(() => {
     getJobData(offset);
