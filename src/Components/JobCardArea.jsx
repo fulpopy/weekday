@@ -18,7 +18,6 @@ const JobCardArea = () => {
     setJobData((prev) => [...prev, ...res]);
     setJobs((prev) => [...prev, ...res]);
   };
-  console.log(jobData);
   useEffect(() => {
     getJobData(offset);
   }, [offset]);
@@ -42,28 +41,57 @@ const JobCardArea = () => {
     minimumPay,
     companyName,
   } = useContext(FiltersContext);
-  // useEffect(() => {
-  //   console.log("useEffect");
-  //   const filterJobHelper = () => {
-  //     const r = roles.map((ele) => ele.title.toLowerCase());
-  //     const filteredJobs = jobData.filter((ele, index) => {
-  //       for (let i = 0; i < r.length; i++) {
-  //         if (r[i] !== jobData[index].jobRole.toLowerCase()) return false;
-  //       }
-  //       return true;
-  //     });
-  //     setJobs(filteredJobs);
-  //     // console.log(filteredJobs);
-  //   };
-  //   filterJobHelper();
-  // }, [
-  //   roles,
-  //   numOfEmployees,
-  //   experienceYear,
-  //   workingMode,
-  //   minimumPay,
-  //   companyName,
-  // ]);
+  useEffect(() => {
+    const filteredJobs = jobData.filter((obj) => {
+      if (roles.length === 0) return true;
+      for (let i = 0; i < roles.length; i++) {
+        if (obj.jobRole.toLowerCase() === roles[i].title.toLowerCase())
+          return true;
+      }
+      return false;
+    });
+    setJobs(filteredJobs);
+  }, [roles, jobData]);
+  // useEffect(() => {}, [numOfEmployees, jobData]);
+  useEffect(() => {
+    const filteredJobs = jobData.filter((obj) => {
+      if (experienceYear.length === 0) return true;
+      for (let i = 0; i < experienceYear.length; i++) {
+        if (obj.minExp >= parseInt(experienceYear[i].title)) return true;
+      }
+      return false;
+    });
+    setJobs(filteredJobs);
+  }, [experienceYear, jobData]);
+  useEffect(() => {
+    const filteredJobs = jobData.filter((obj) => {
+      if (workingMode.length === 0) return true;
+      for (let i = 0; i < workingMode.length; i++) {
+        if (obj.location.toLowerCase() === workingMode[i].title.toLowerCase())
+          return true;
+      }
+      return false;
+    });
+    setJobs(filteredJobs);
+  }, [workingMode, jobData]);
+  useEffect(() => {
+    const filteredJobs = jobData.filter((obj) => {
+      if (minimumPay.length === 0) return true;
+      for (let i = 0; i < minimumPay.length; i++) {
+        if (obj.minJdSalary >= parseInt(minimumPay[i].title)) return true;
+      }
+      return false;
+    });
+    setJobs(filteredJobs);
+  }, [minimumPay, jobData]);
+  useEffect(() => {
+    const filteredJobs = jobData.filter((obj) => {
+      return companyName
+        ? obj.companyName.toLowerCase() === companyName.toLowerCase()
+        : true;
+    });
+    setJobs(filteredJobs);
+  }, [companyName, jobData]);
   return (
     <>
       <div
