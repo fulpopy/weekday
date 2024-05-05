@@ -1,12 +1,12 @@
 import axios from "axios";
 
-export const getJobs = async () => {
+export const getJobs = async (offset) => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
   const body = JSON.stringify({
     limit: 10,
-    offset: 0,
+    offset: { offset },
   });
 
   const requestOptions = {
