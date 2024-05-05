@@ -1,6 +1,7 @@
 import React from "react";
 import FilterBar from "../Components/FilterBar";
 import { styled } from "@mui/material";
+import JobCard from "../Components/JobCard";
 
 const StyledImage = styled("img")({
   height: "180px",
@@ -10,7 +11,8 @@ const SearchJobs = () => {
   return (
     <div>
       <FilterBar />
-      <div
+      <JobCard />
+      {/* <div
         style={{
           display: "flex",
           flexDirection: "column",
@@ -20,6 +22,7 @@ const SearchJobs = () => {
           height: "80vh",
         }}
       >
+        
         <StyledImage
           src="https://jobs.weekday.works/_next/static/media/nothing-found.4d8f334c.png"
           alt="no jobs found"
@@ -34,7 +37,7 @@ const SearchJobs = () => {
         >
           No Jobs available for this category at the moment
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
