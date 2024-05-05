@@ -49,8 +49,22 @@ const StyledLink = styled("a")(`
   }
 `);
 
-const JobCard = () => {
+const JobCard = ({ job }) => {
   const [open, setOpen] = useState(false);
+  const {
+    jdUid,
+    jdLink,
+    jobDetailsFromCompany,
+    maxJdSalary,
+    minJdSalary,
+    salaryCurrencyCode,
+    location,
+    minExp,
+    maxExp,
+    jobRole,
+    companyName,
+    logoUrl,
+  } = job;
   return (
     <>
       <StyledCard>
@@ -73,8 +87,12 @@ const JobCard = () => {
           <div
             style={{ display: "flex", height: "70px", margin: "20px 0 0 0" }}
           >
-            <div style={{ height: "20px", width: "20px" }}>
-              <img src="" alt="Hike" />
+            <div style={{ height: "40px", width: "40px" }}>
+              <img
+                style={{ height: "100%", marginTop: "5px" }}
+                src={logoUrl}
+                alt="Hike"
+              />
             </div>
             <div
               style={{
@@ -84,28 +102,40 @@ const JobCard = () => {
               }}
             >
               <div>
-                <StyledLink href="xyz.com">Hike</StyledLink>
+                <StyledLink href="xyz.com">{companyName}</StyledLink>
               </div>
               <div>
-                <Typography style={{ fontSize: "15px", fontWeight: "100" }}>
-                  Quality Engineer (Full Time, Remote)
+                <Typography
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: "100",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {jobRole === "ios" ? "IOS" : jobRole} (Full Time, {location})
                 </Typography>
               </div>
               <div>
-                <Typography style={{ fontSize: "12px", fontWeight: "500" }}>
-                  Delhi
+                <Typography
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "500",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {location}
                 </Typography>
               </div>
             </div>
           </div>
           <div style={{ height: "20px", fontSize: "15px" }}>
-            Estimated Salary: ₹10 - 14 LPA ⚠️
+            Estimated Salary: {salaryCurrencyCode === "USD" ? "$" : "₹"}
+            {minJdSalary} - {maxJdSalary} ⚠️
           </div>
           <div
             style={{
               height: "260px",
               margin: "10px 0 0 0",
-              // backgroundColor: "pink",
             }}
           >
             <div>
@@ -113,12 +143,7 @@ const JobCard = () => {
                 About Company:
               </Typography>
             </div>
-            <div
-            // style={{
-            //   background:
-            //     "linear-gradient()",
-            // }}
-            >
+            <div>
               <div
                 style={{
                   height: "195px",
@@ -131,19 +156,7 @@ const JobCard = () => {
                     fontSize: "15px",
                   }}
                 >
-                  We are a registered Salesforce partner and ISO 27001 certified
-                  company specializing in Salesforce consultation,
-                  implementation, and AppExchange product development. Our
-                  expertise includes Sales Cloud, Service Cloud, Marketing
-                  Cloud, Commerce Cloud, Community Cloud, and Vlocity. We also
-                  offer staff augmentation and recruitment services to help
-                  businesses build high-performing teams. Our goal is to deliver
-                  affordable solutions of the highest quality.ur expertise
-                  includes Sales Cloud, Service Cloud, Marketing Cloud, Commerce
-                  Cloud, Community Cloud, and Vlocity. We also offer staff
-                  augmentation and recruitment services to help businesses build
-                  high-performing teams. Our goal is to deliver affordable
-                  solutions of the highest quality.
+                  {jobDetailsFromCompany}
                 </Typography>
               </div>
               <div
@@ -159,7 +172,11 @@ const JobCard = () => {
                 >
                   Show More
                 </Button>
-                <MoreInfoDrawer open={open} setOpen={setOpen} />
+                <MoreInfoDrawer
+                  jobDetailsFromCompany={jobDetailsFromCompany}
+                  open={open}
+                  setOpen={setOpen}
+                />
               </div>
             </div>
           </div>
@@ -178,7 +195,7 @@ const JobCard = () => {
             >
               Minimum Experience
             </Typography>
-            <Typography>2 years</Typography>
+            <Typography>{minExp} years</Typography>
           </div>
           <div
             style={{
@@ -189,7 +206,17 @@ const JobCard = () => {
               justifyContent: "center",
             }}
           >
-            <ColorButton variant="contained">⚡ Easy Apply</ColorButton>
+            <ColorButton variant="contained">
+              <a
+                style={{
+                  textDecoration: "none",
+                  color: "black",
+                }}
+                href={jdLink}
+              >
+                ⚡ Easy Apply
+              </a>
+            </ColorButton>
           </div>
         </div>
       </StyledCard>

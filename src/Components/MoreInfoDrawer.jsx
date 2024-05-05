@@ -12,7 +12,7 @@ const drawerStyle = {
   overflowY: "scroll",
 };
 
-const MoreInfoDrawer = ({ open, setOpen }) => {
+const MoreInfoDrawer = ({ open, setOpen, jobDetailsFromCompany }) => {
   return (
     <Drawer
       open={open}
@@ -38,48 +38,7 @@ const MoreInfoDrawer = ({ open, setOpen }) => {
       <Typography
         style={{ fontSize: "15px", fontWeight: "200", padding: "0 20px" }}
       >
-        We are a registered Salesforce partner and ISO 27001 certified company
-        specializing in Salesforce consultation, implementation, and AppExchange
-        product development. Our expertise includes Sales Cloud, Service Cloud,
-        Marketing Cloud, Commerce Cloud, Community Cloud, and Vlocity. We also
-        offer staff augmentation and recruitment services to help businesses
-        build high-performing teams. Our goal is to deliver affordable solutions
-        of the highest quality.ur expertise includes Sales Cloud, Service Cloud,
-        Marketing Cloud, Commerce Cloud, Community Cloud, and Vlocity. We also
-        offer staff augmentation and recruitment services to help businesses
-        build high-performing teams. Our goal is to deliver affordable solutions
-        of the highest quality. We are a registered Salesforce partner and ISO
-        27001 certified company specializing in Salesforce consultation,
-        implementation, and AppExchange product development. Our expertise
-        includes Sales Cloud, Service Cloud, Marketing Cloud, Commerce Cloud,
-        Community Cloud, and Vlocity. We also offer staff augmentation and
-        recruitment services to help businesses build high-performing teams. Our
-        goal is to deliver affordable solutions of the highest quality.ur
-        expertise includes Sales Cloud, Service Cloud, Marketing Cloud, Commerce
-        Cloud, Community Cloud, and Vlocity. We also offer staff augmentation
-        and recruitment services to help businesses build high-performing teams.
-        Our goal is to deliver affordable solutions of the highest quality. We
-        are a registered Salesforce partner and ISO 27001 certified company
-        specializing in Salesforce consultation, implementation, and AppExchange
-        product development. Our expertise includes Sales Cloud, Service Cloud,
-        Marketing Cloud, Commerce Cloud, Community Cloud, and Vlocity. We also
-        offer staff augmentation and recruitment services to help businesses
-        build high-performing teams. Our goal is to deliver affordable solutions
-        of the highest quality.ur expertise includes Sales Cloud, Service Cloud,
-        Marketing Cloud, Commerce Cloud, Community Cloud, and Vlocity. We also
-        offer staff augmentation and recruitment services to help businesses
-        build high-performing teams. Our goal is to deliver affordable solutions
-        of the highest quality. We are a registered Salesforce partner and ISO
-        27001 certified company specializing in Salesforce consultation,
-        implementation, and AppExchange product development. Our expertise
-        includes Sales Cloud, Service Cloud, Marketing Cloud, Commerce Cloud,
-        Community Cloud, and Vlocity. We also offer staff augmentation and
-        recruitment services to help businesses build high-performing teams. Our
-        goal is to deliver affordable solutions of the highest quality.ur
-        expertise includes Sales Cloud, Service Cloud, Marketing Cloud, Commerce
-        Cloud, Community Cloud, and Vlocity. We also offer staff augmentation
-        and recruitment services to help businesses build high-performing teams.
-        Our goal is to deliver affordable solutions of the highest quality.
+        {jobDetailsFromCompany}
       </Typography>
     </Drawer>
   );

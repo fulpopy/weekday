@@ -1,10 +1,12 @@
-export const getJobs = () => {
+import axios from "axios";
+
+export const getJobs = async () => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
   const body = JSON.stringify({
     limit: 10,
-    offset: 10,
+    offset: 0,
   });
 
   const requestOptions = {
@@ -13,8 +15,13 @@ export const getJobs = () => {
     body,
   };
 
-  fetch("https://api.weekday.technology/adhoc/getSampleJdJSON", requestOptions)
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.error(error));
+  let res = await axios(
+    "https://api.weekday.technology/adhoc/getSampleJdJSON",
+    requestOptions
+  );
+  const filteredData = res.data.jdList.filter((obj) =>
+    Object.values(obj).every((value) => value !== null)
+  );
+  // console.log(filteredData);
+  return filteredData;
 };
