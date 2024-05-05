@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Weekday 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to theWeekday Application Platform. This project aims to create a user-friendly platform for job seekers to browse and apply for job listings. Utilizing ReactJS, Redux, CSS, and Material UI, the platform allows users to view job listings, apply filters to refine search results, and seamlessly load more job listings via infinite scroll.
 
-## Available Scripts
 
-In the project directory, you can run:
+## Run Locally
 
-### `npm start`
+Clone the project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+bash
+  git clone https://github.com/fulpopy/weekday.git
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+Go to the project directory
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+bash
+  cd weekday
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Install dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+bash
+  npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+Start the server
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+bash
+  npm start
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## API Reference
 
-## Learn More
+#### Get all Job lists
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+http
+  POST /adhoc/getSampleJdJSON
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+|   Body    |   Type   |         Description            |
+| :-------- | :------- | :------------------------------|
+|  limit  | integer|    Limit of the responses      |
+|  offset | integer| Starting index of the response |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Authors
 
-### Making a Progressive Web App
+- [@fulpopy](https://github.com/fulpopy)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+## 🛠 Skills
+React JS, Javascript, HTML, CSS, NodeJS, C++, Data Structures & Algorithm, System Design...
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+## Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Filters
+- Cards
+- Fullscreen mode
+- Responsive
